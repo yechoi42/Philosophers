@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:40:05 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 00:40:21 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:20:25 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,42 @@
 
 long    get_time()
 {
-    struct timeval mytime;
+	struct timeval mytime;
 
-    gettimeofday(&mytime, NULL);
-    return (mytime.tv_sec * 1000L + mytime.tv_usec / 1000L);
+	gettimeofday(&mytime, NULL);
+	return (mytime.tv_sec * 1000L + mytime.tv_usec / 1000L);
 }
 
 int     is_digit_str(char *argv)
 {
-    int i;
+	int i;
 
-    i = -1;
-    while (argv[++i])
-    {
-        if (argv[i] < '0' || argv[i] > '9')
-            return (-1);
-    }
-    return (0);
+	i = -1;
+	while (argv[++i])
+	{
+		if (argv[i] < '0' || argv[i] > '9')
+			return (-1);
+	}
+	return (0);
 }
 
 void    put_message(char* str, t_philo *philo)
 {
-    long    now;
+	long    now;
 
-    now = get_time();
-    pthread_mutex_lock(philo->to_check);
-    if (g_full_philo_num < philo->info.philo_num &&
-        g_dead_philo_num == 0)
-    {
-        pthread_mutex_unlock(philo->to_check);
-        pthread_mutex_lock(philo->to_write);
-        ft_putnbr_fd(now - philo->start_time, 1);
-        ft_putstr_fd(" ", 1);
-        ft_putnbr_fd(philo->idx, 1);
-        ft_putstr_fd(str, 1);
-        pthread_mutex_unlock(philo->to_write);
-        return;
-    }
-    pthread_mutex_unlock(philo->to_check);
+	now = get_time();
+	pthread_mutex_lock(philo->to_check);
+	if (g_full_philo_num < philo->info.philo_num &&
+		g_dead_philo_num == 0)
+	{
+		pthread_mutex_unlock(philo->to_check);
+		pthread_mutex_lock(philo->to_write);
+		ft_putnbr_fd(now - philo->start_time, 1);
+		ft_putstr_fd(" ", 1);
+		ft_putnbr_fd(philo->idx, 1);
+		ft_putstr_fd(str, 1);
+		pthread_mutex_unlock(philo->to_write);
+		return;
+	}
+	pthread_mutex_unlock(philo->to_check);
 }

@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:41:38 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 00:57:17 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:20:48 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-int     check_death(t_philo *philo)
+int		check_death(t_philo *philo)
 {
 	long now;
 
