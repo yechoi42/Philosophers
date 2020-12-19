@@ -6,11 +6,13 @@
 #    By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 19:10:20 by yechoi            #+#    #+#              #
-#    Updated: 2020/12/20 00:52:23 by yechoi           ###   ########.fr        #
+#    Updated: 2020/12/20 02:09:13 by yechoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS		=	main.c init.c check.c utils.c utils2.c
+
+OBJS		= 	$(SRCS:.c=.o)
 
 CC			=	gcc
 
