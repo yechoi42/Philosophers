@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:38:03 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:19:48 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:25:22 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int     init_info(t_info *info, int argc, char **argv)
+int		init_info(t_info *info, int argc, char **argv)
 {
 	int i;
 
@@ -35,12 +35,12 @@ int     init_info(t_info *info, int argc, char **argv)
 	return (0);
 }
 
-void     init_mutexes(
+void	init_mutexes(
 	t_info info,
 	pthread_mutex_t *to_write,
 	pthread_mutex_t *to_check,
 	pthread_mutex_t *forks
-	)
+)
 {
 	int i;
 
@@ -53,14 +53,14 @@ void     init_mutexes(
 	pthread_mutex_init(to_check, NULL);
 }
 
-t_philo *init_philos(
+t_philo	*init_philos(
 	t_info info,
 	pthread_mutex_t *to_write,
 	pthread_mutex_t *to_check,
 	pthread_mutex_t *forks
-	)
+)
 {
-	int     i;
+	int		i;
 	t_philo *philos;
 
 	if (!(philos = (t_philo *)malloc(sizeof(t_philo) * info.philo_num)))

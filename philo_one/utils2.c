@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:40:05 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:20:25 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:32:43 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-long    get_time()
+long	get_time(void)
 {
 	struct timeval mytime;
 
@@ -20,7 +20,7 @@ long    get_time()
 	return (mytime.tv_sec * 1000L + mytime.tv_usec / 1000L);
 }
 
-int     is_digit_str(char *argv)
+int		is_digit_str(char *argv)
 {
 	int i;
 
@@ -33,9 +33,9 @@ int     is_digit_str(char *argv)
 	return (0);
 }
 
-void    put_message(char* str, t_philo *philo)
+void	put_message(char *str, t_philo *philo)
 {
-	long    now;
+	long	now;
 
 	now = get_time();
 	pthread_mutex_lock(philo->to_check);
@@ -49,7 +49,7 @@ void    put_message(char* str, t_philo *philo)
 		ft_putnbr_fd(philo->idx, 1);
 		ft_putstr_fd(str, 1);
 		pthread_mutex_unlock(philo->to_write);
-		return;
+		return ;
 	}
 	pthread_mutex_unlock(philo->to_check);
 }

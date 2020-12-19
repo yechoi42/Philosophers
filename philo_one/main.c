@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 20:02:07 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:19:57 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:29:59 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-void    eat(t_philo *philo)
+void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->left_fork);
 	put_message(" has taken a fork\n", philo);
@@ -28,11 +28,11 @@ void    eat(t_philo *philo)
 	pthread_mutex_unlock(philo->right_fork);
 }
 
-void    *routine(void *p)
+void	*routine(void *p)
 {
-	pthread_t   monitor;
-	t_philo     *philo;
-	
+	pthread_t	monitor;
+	t_philo		*philo;
+
 	philo = (t_philo *)p;
 	if (philo->idx % 2)
 		usleep(20);
@@ -45,7 +45,7 @@ void    *routine(void *p)
 		eat(philo);
 		put_message(" is sleeping\n", philo);
 		usleep(philo->info.time_to_sleep);
-		put_message(" is thinking\n", philo);  
+		put_message(" is thinking\n", philo);
 		pthread_mutex_lock(philo->to_check);
 	}
 	pthread_mutex_unlock(philo->to_check);
@@ -53,9 +53,10 @@ void    *routine(void *p)
 	return (NULL);
 }
 
-void    sit_on_table(t_info info, t_philo *philos)
+void	sit_on_table(t_info info, t_philo *philos)
 {
-	int         i;
+	int	i;
+
 	i = -1;
 	while (++i < info.philo_num)
 	{
@@ -69,12 +70,12 @@ void    sit_on_table(t_info info, t_philo *philos)
 	}
 }
 
-void    free_destroy(
+void	free_destroy(
 	t_philo *philos,
 	pthread_mutex_t *forks,
 	pthread_mutex_t *to_write,
 	pthread_mutex_t *to_check
-	)
+)
 {
 	int i;
 
@@ -90,19 +91,18 @@ void    free_destroy(
 	free(forks);
 }
 
-
-int     main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_info          info;
-	t_philo         *philos;
-	pthread_mutex_t to_write;
-	pthread_mutex_t to_check;
-	pthread_mutex_t *forks;
+	t_info			info;
+	t_philo			*philos;
+	pthread_mutex_t	to_write;
+	pthread_mutex_t	to_check;
+	pthread_mutex_t	*forks;
 
 	g_dead_philo_num = 0;
 	g_full_philo_num = 0;
 	if (argc != 5 && argc != 6)
-		return (1);   
+		return (1);
 	if (init_info(&info, argc, argv) == -1)
 		return (1);
 	forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * info.philo_num);
