@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:44:43 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:22:27 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 02:01:10 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-long    get_time()
+long	get_time(void)
 {
 	struct timeval mytime;
 
@@ -20,7 +20,7 @@ long    get_time()
 	return (mytime.tv_sec * 1000L + mytime.tv_usec / 1000L);
 }
 
-int     is_digit_str(char *argv)
+int		is_digit_str(char *argv)
 {
 	int i;
 
@@ -33,16 +33,16 @@ int     is_digit_str(char *argv)
 	return (0);
 }
 
-char    *ft_strnbrjoin(char *str, int i)
+char	*ft_strnbrjoin(char *str, int i)
 {
-	int     i2;
-	int     str_len;
-	int     int_len;
-	char    *ret;
+	int		i2;
+	int		str_len;
+	int		int_len;
+	char	*ret;
 
 	i2 = i;
 	int_len = 0;
-	while(i2 > 0)
+	while (i2 > 0)
 	{
 		i2 /= 10;
 		int_len++;
@@ -59,7 +59,7 @@ char    *ft_strnbrjoin(char *str, int i)
 	return (ret);
 }
 
-void    put_message(char *str, t_philo *philo)
+void	put_message(char *str, t_philo *philo)
 {
 	long now;
 
@@ -76,7 +76,7 @@ void    put_message(char *str, t_philo *philo)
 		ft_putnbr_fd(philo->idx, 1);
 		ft_putstr_fd(str, 1);
 		sem_post(philo->sems->to_write);
-		return;
+		return ;
 	}
 	sem_post(philo->sems->to_check);
 }

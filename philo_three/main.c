@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 21:17:45 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:22:09 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:59:31 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int		eat(t_philo *philo)
 	return (0);
 }
 
-void    *routine(void *p)
+void	*routine(void *p)
 {
-	pthread_t   monitor;
-	t_philo     *philo;
+	pthread_t	monitor;
+	t_philo		*philo;
 
 	philo = (t_philo *)p;
 	if (philo->idx % 2)
@@ -59,7 +59,7 @@ void    *routine(void *p)
 	return (NULL);
 }
 
-void    sit_on_table(t_info info, t_philo *philos)
+void	sit_on_table(t_info info, t_philo *philos)
 {
 	int i;
 
@@ -67,16 +67,16 @@ void    sit_on_table(t_info info, t_philo *philos)
 	while (++i < info.philo_num)
 	{
 		if ((philos[i].pid = fork()) == -1)
-			return;
+			return ;
 		else if (philos[i].pid == 0)
 		{
 			routine(&philos[i]);
 		}
 	}
-	return;
+	return ;
 }
 
-void    free_destroy(t_info info, t_philo *philos, t_sems *sems)
+void	free_destroy(t_info info, t_philo *philos, t_sems *sems)
 {
 	int i;
 
@@ -101,11 +101,11 @@ void    free_destroy(t_info info, t_philo *philos, t_sems *sems)
 	sem_unlink("/to_check");
 }
 
-int     main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_info          info;
-	t_philo         *philos;
-	t_sems          sems;
+	t_info		info;
+	t_philo		*philos;
+	t_sems		sems;
 
 	g_dead_philo_num = 0;
 	g_full_philo_num = 0;

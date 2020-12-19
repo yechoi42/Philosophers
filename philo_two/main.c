@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 21:17:45 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:21:13 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:40:02 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-void    *eat(t_philo *philo)
+void	*eat(t_philo *philo)
 {
 	sem_wait(philo->sems->forks);
 	put_message(" has taken a fork\n", philo);
@@ -29,10 +29,10 @@ void    *eat(t_philo *philo)
 	return (NULL);
 }
 
-void    *routine(void *p)
+void	*routine(void *p)
 {
-	pthread_t   monitor;
-	t_philo     *philo;
+	pthread_t	monitor;
+	t_philo		*philo;
 
 	philo = (t_philo *)p;
 	if (philo->idx % 2)
@@ -54,7 +54,7 @@ void    *routine(void *p)
 	return (NULL);
 }
 
-void    sit_on_table(t_info info, t_philo *philos)
+void	sit_on_table(t_info info, t_philo *philos)
 {
 	int i;
 
@@ -70,7 +70,7 @@ void    sit_on_table(t_info info, t_philo *philos)
 	}
 }
 
-void    free_destroy(t_info info, t_philo *philos, t_sems *sems)
+void	free_destroy(t_info info, t_philo *philos, t_sems *sems)
 {
 	int i;
 
@@ -89,11 +89,11 @@ void    free_destroy(t_info info, t_philo *philos, t_sems *sems)
 	sem_unlink("/to_check");
 }
 
-int     main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	t_info          info;
-	t_philo         *philos;
-	t_sems          sems;
+	t_info		info;
+	t_philo		*philos;
+	t_sems		sems;
 
 	g_dead_philo_num = 0;
 	g_full_philo_num = 0;

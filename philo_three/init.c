@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:45:54 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:22:05 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:58:03 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-int     init_info(t_info *info, int argc, char **argv)
+int		init_info(t_info *info, int argc, char **argv)
 {
 	int i;
 
@@ -35,25 +35,27 @@ int     init_info(t_info *info, int argc, char **argv)
 	return (0);
 }
 
-
-int    init_sems(t_info info, t_sems *sems)
+int		init_sems(t_info info, t_sems *sems)
 {
 	sem_unlink("/forks");
 	sem_unlink("/to_write");
 	sem_unlink("/to_check");
-	if ((sems->forks = sem_open("/forks", O_CREAT | O_EXCL, 0644, info.philo_num)) == SEM_FAILED)
+	if ((sems->forks = sem_open("/forks", O_CREAT | O_EXCL,
+					0644, info.philo_num)) == SEM_FAILED)
 		return (-1);
-	if ((sems->to_write = sem_open("/to_write", O_CREAT | O_EXCL, 0644, 1)) == SEM_FAILED)
+	if ((sems->to_write = sem_open("/to_write", O_CREAT | O_EXCL,
+					0644, 1)) == SEM_FAILED)
 		return (-1);
-	if ((sems->to_check = sem_open("/to_check", O_CREAT | O_EXCL, 0644, 1)) == SEM_FAILED)
+	if ((sems->to_check = sem_open("/to_check", O_CREAT | O_EXCL,
+					0644, 1)) == SEM_FAILED)
 		return (-1);
 	return (0);
 }
 
-t_philo *init_philos(t_info info, t_sems *sems)
+t_philo	*init_philos(t_info info, t_sems *sems)
 {
-	int     i;
-	t_philo *philos;
+	int		i;
+	t_philo	*philos;
 
 	if (!(philos = (t_philo *)malloc(sizeof(t_philo) * info.philo_num)))
 		return (NULL);
@@ -65,7 +67,7 @@ t_philo *init_philos(t_info info, t_sems *sems)
 		philos[i].sems = sems;
 		philos[i].to_eat_name = ft_strnbrjoin("/to_eat", i);
 		sem_unlink(philos[i].to_eat_name);
-		if ((philos[i].to_eat = sem_open(philos[i].to_eat_name, 
+		if ((philos[i].to_eat = sem_open(philos[i].to_eat_name,
 			O_CREAT | O_EXCL, 0644, 1)) == SEM_FAILED)
 			return (NULL);
 		philos[i].start_time = get_time();

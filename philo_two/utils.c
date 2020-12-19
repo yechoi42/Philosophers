@@ -6,11 +6,11 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 19:08:13 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:21:22 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:40:42 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo_two.h"
+#include "philo_two.h"
 
 int		ft_atoi(const char *nptr)
 {

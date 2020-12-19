@@ -6,13 +6,13 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 01:01:38 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:21:51 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/20 01:55:47 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-int     check_death(t_philo *philo)
+int		check_death(t_philo *philo)
 {
 	long now;
 
@@ -29,7 +29,7 @@ int     check_death(t_philo *philo)
 		return (1);
 	}
 	sem_post(philo->to_eat);
-	return(0);
+	return (0);
 }
 
 int		check_full(t_philo *philo)
@@ -49,20 +49,19 @@ int		check_full(t_philo *philo)
 	return (0);
 }
 
-
 void	*check_health(void *p)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)p;
-	sem_wait(philo->sems->to_check);    
+	sem_wait(philo->sems->to_check);
 	while (g_full_philo_num < philo->info.philo_num && !g_dead_philo_num)
 	{
 		sem_post(philo->sems->to_check);
 		if (check_death(philo))
-			break;
+			break ;
 		check_full(philo);
-		sem_wait(philo->sems->to_check);   
+		sem_wait(philo->sems->to_check);
 	}
 	sem_post(philo->sems->to_check);
 	return (NULL);
