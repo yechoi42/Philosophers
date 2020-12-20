@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:40:05 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:32:43 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/21 00:00:44 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,19 @@ int		is_digit_str(char *argv)
 
 void	put_message(char *str, t_philo *philo)
 {
-	long	now;
-
-	now = get_time();
+	pthread_mutex_lock(philo->to_write);
 	pthread_mutex_lock(philo->to_check);
 	if (g_full_philo_num < philo->info.philo_num &&
 		g_dead_philo_num == 0)
 	{
 		pthread_mutex_unlock(philo->to_check);
-		pthread_mutex_lock(philo->to_write);
-		ft_putnbr_fd(now - philo->start_time, 1);
+		ft_putnbr_fd(get_time() - philo->start_time, 1);
 		ft_putstr_fd(" ", 1);
 		ft_putnbr_fd(philo->idx, 1);
 		ft_putstr_fd(str, 1);
 		pthread_mutex_unlock(philo->to_write);
 		return ;
 	}
+	pthread_mutex_unlock(philo->to_write);
 	pthread_mutex_unlock(philo->to_check);
 }
