@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 01:01:38 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:55:47 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/21 20:40:56 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		check_death(t_philo *philo)
 		sem_wait(philo->sems->to_check);
 		g_dead_philo_num += 1;
 		sem_post(philo->sems->to_check);
+		exit(1);
 		return (1);
 	}
 	sem_post(philo->to_eat);
