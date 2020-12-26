@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:38:03 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/26 21:48:57 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/26 22:18:07 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		init_info(t_info *info, int argc, char **argv)
 			return (-1);
 	}
 	info->philo_num = ft_atoi(argv[1]);
-	if (info->philo_num <= 2)
+	if (info->philo_num < 2)
 		return (-1);
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);
