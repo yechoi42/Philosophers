@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:40:05 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/26 21:25:42 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/26 21:39:12 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	vsleep(long time)
 	{
 		now = get_time();
 		if (now - start_time > time)
-			return;
+			return ;
 		usleep(100);
 	}
 }

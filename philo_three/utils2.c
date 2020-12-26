@@ -6,11 +6,26 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:44:43 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 02:01:10 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/26 21:39:14 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+void	vsleep(long time)
+{
+	long	start_time;
+	long	now;
+
+	start_time = get_time();
+	while (42)
+	{
+		now = get_time();
+		if (now - start_time > time)
+			return ;
+		usleep(100);
+	}
+}
 
 long	get_time(void)
 {

@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 21:17:45 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:40:02 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/26 21:31:35 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	*eat(t_philo *philo)
 	philo->last_meal_time = get_time();
 	philo->eaten_meals += 1;
 	sem_post(philo->to_eat);
-	usleep(philo->info.time_to_eat);
+	vsleep(philo->info.time_to_eat);
 	sem_post(philo->sems->forks);
 	sem_post(philo->sems->forks);
 	return (NULL);
@@ -36,7 +36,7 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	if (philo->idx % 2)
-		usleep(philo->info.time_to_eat);
+		vsleep(philo->info.time_to_eat);
 	pthread_create(&monitor, NULL, check_health, p);
 	sem_wait(philo->sems->to_check);
 	while (g_full_philo_num < philo->info.philo_num &&
@@ -45,7 +45,7 @@ void	*routine(void *p)
 		sem_post(philo->sems->to_check);
 		eat(philo);
 		put_message(" is sleeping\n", philo);
-		usleep(philo->info.time_to_sleep);
+		vsleep(philo->info.time_to_sleep);
 		put_message(" is thinking\n", philo);
 		sem_wait(philo->sems->to_check);
 	}
