@@ -6,7 +6,7 @@
 #    By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/04 19:10:20 by yechoi            #+#    #+#              #
-#    Updated: 2020/12/20 02:09:27 by yechoi           ###   ########.fr        #
+#    Updated: 2020/12/26 21:46:10 by yechoi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,13 @@ INCLUDES	= 	-I./
 
 NAME		=	philo_one
 
+.c.o		:
+			$(CC) $(FLAG) -c $< -o $(<:.c=.o) $(INCLUDES)
+
 all			: $(NAME)
 
-$(NAME)		: 
-		$(CC) $(FLAG) $(SRCS) -o $(NAME) $(INCLUDES)
+$(NAME)		: $(OBJS)
+		$(CC) $(FLAG) $(OBJS) -o $(NAME) $(INCLUDES)
 
 clean		:
 		rm -rf $(OBJS)
