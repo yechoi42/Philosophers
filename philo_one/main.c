@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 20:02:07 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:29:59 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/26 21:30:37 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	eat(t_philo *philo)
 	philo->last_meal_time = get_time();
 	philo->eaten_meals += 1;
 	pthread_mutex_unlock(&philo->to_eat);
-	usleep(philo->info.time_to_eat);
+	vsleep(philo->info.time_to_eat);
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);
 }
@@ -35,7 +35,7 @@ void	*routine(void *p)
 
 	philo = (t_philo *)p;
 	if (philo->idx % 2)
-		usleep(20);
+		vsleep(20);
 	pthread_create(&monitor, NULL, check_health, p);
 	pthread_mutex_lock(philo->to_check);
 	while (g_full_philo_num < philo->info.philo_num &&
@@ -44,7 +44,7 @@ void	*routine(void *p)
 		pthread_mutex_unlock(philo->to_check);
 		eat(philo);
 		put_message(" is sleeping\n", philo);
-		usleep(philo->info.time_to_sleep);
+		vsleep(philo->info.time_to_sleep);
 		put_message(" is thinking\n", philo);
 		pthread_mutex_lock(philo->to_check);
 	}
@@ -61,7 +61,6 @@ void	sit_on_table(t_info info, t_philo *philos)
 	while (++i < info.philo_num)
 	{
 		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
-		usleep(20);
 	}
 	i = -1;
 	while (++i < info.philo_num)

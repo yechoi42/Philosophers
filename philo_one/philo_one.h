@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/12 20:02:19 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:48:33 by yechoi           ###   ########.fr       */
+/*   Updated: 2020/12/26 21:29:44 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void				ft_putnbr_fd(int n, int fd);
 /*
 ** utils2.c
 */
+void				vsleep(long time);
 long				get_time();
 int					is_digit_str(char *argv);
 void				put_message(char *str, t_philo *philo);
