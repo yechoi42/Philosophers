@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:41:38 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:35:04 by yechoi           ###   ########.fr       */
+/*   Updated: 2021/02/11 22:57:33 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int		check_full(t_philo *philo)
 {
 	sem_wait(philo->to_eat);
 	if (philo->info.must_eat_num != -1 &&
-		philo->eaten_meals >= philo->info.must_eat_num)
+		philo->eaten_meals >= philo->info.must_eat_num &&
+		philo->status != FULL)
 	{
 		sem_post(philo->to_eat);
 		philo->status = FULL;

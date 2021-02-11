@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:39:20 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/20 01:27:17 by yechoi           ###   ########.fr       */
+/*   Updated: 2021/02/11 23:06:18 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		check_death(t_philo *philo)
 int		check_full(t_philo *philo)
 {
 	if (philo->info.must_eat_num != -1 &&
-		philo->eaten_meals >= philo->info.must_eat_num)
+		philo->eaten_meals >= philo->info.must_eat_num &&
+		philo->status != FULL)
 	{
 		pthread_mutex_unlock(&philo->to_eat);
 		philo->status = FULL;
