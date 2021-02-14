@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 00:45:54 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/26 22:01:48 by yechoi           ###   ########.fr       */
+/*   Updated: 2021/02/15 00:41:02 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		init_sems(t_info info, t_sems *sems)
 	sem_unlink("/forks");
 	sem_unlink("/to_write");
 	sem_unlink("/to_check");
+	sem_unlink("/full");
 	if ((sems->forks = sem_open("/forks", O_CREAT | O_EXCL,
 					0644, info.philo_num)) == SEM_FAILED)
 		return (-1);
@@ -47,6 +48,9 @@ int		init_sems(t_info info, t_sems *sems)
 					0644, 1)) == SEM_FAILED)
 		return (-1);
 	if ((sems->to_check = sem_open("/to_check", O_CREAT | O_EXCL,
+					0644, 1)) == SEM_FAILED)
+		return (-1);
+	if ((sems->full = sem_open("/full", O_CREAT | O_EXCL,
 					0644, 1)) == SEM_FAILED)
 		return (-1);
 	return (0);

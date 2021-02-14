@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 21:17:45 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/26 21:30:58 by yechoi           ###   ########.fr       */
+/*   Updated: 2021/02/15 01:30:34 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ void	*routine(void *p)
 		vsleep(philo->info.time_to_eat);
 	pthread_create(&monitor, NULL, check_health, p);
 	sem_wait(philo->sems->to_check);
-	while (g_full_philo_num < philo->info.philo_num &&
-		g_dead_philo_num == 0)
+	while (philo->status != DEAD)
 	{
 		sem_post(philo->sems->to_check);
 		eat(philo);
@@ -61,18 +60,23 @@ void	*routine(void *p)
 
 void	sit_on_table(t_info info, t_philo *philos)
 {
-	int i;
+	int 		i;
+	pthread_t	full_check;
 
 	i = -1;
 	while (++i < info.philo_num)
 	{
 		if ((philos[i].pid = fork()) == -1)
+		{
 			return ;
+		}
 		else if (philos[i].pid == 0)
 		{
 			routine(&philos[i]);
 		}
 	}
+	pthread_create(&full_check, NULL, is_full, (void *)&philos[0]);
+	pthread_detach(full_check);
 	return ;
 }
 
@@ -96,9 +100,11 @@ void	free_destroy(t_info info, t_philo *philos, t_sems *sems)
 	sem_close(sems->forks);
 	sem_close(sems->to_check);
 	sem_close(sems->to_write);
+	sem_close(sems->full);
 	sem_unlink("/forks");
 	sem_unlink("/to_write");
 	sem_unlink("/to_check");
+	sem_unlink("/full");
 }
 
 int		main(int argc, char **argv)

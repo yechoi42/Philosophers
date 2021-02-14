@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 14:17:59 by yechoi            #+#    #+#             */
-/*   Updated: 2020/12/26 21:29:57 by yechoi           ###   ########.fr       */
+/*   Updated: 2021/02/15 00:43:13 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_sems
 	sem_t		*forks;
 	sem_t		*to_write;
 	sem_t		*to_check;
+	sem_t		*full;
 }				t_sems;
 
 typedef struct	s_philo
@@ -73,6 +74,7 @@ t_philo			*init_philos(t_info info, t_sems *sems);
 int				check_death(t_philo *philo);
 int				check_full(t_philo *philo);
 void			*check_health(void *p);
+void			*is_full(void *p);
 
 /*
 ** utils.c
