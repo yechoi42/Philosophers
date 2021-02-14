@@ -6,7 +6,7 @@
 /*   By: yechoi <yechoi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/20 01:01:38 by yechoi            #+#    #+#             */
-/*   Updated: 2021/02/15 01:32:09 by yechoi           ###   ########.fr       */
+/*   Updated: 2021/02/15 02:24:11 by yechoi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	*is_full(void *p)
 	{
 		count++;
 		sem_wait(philo->sems->full);
-		if (philo->info.must_eat_num != -1 && count == philo->info.philo_num * philo->info.must_eat_num)
+		if (philo->info.must_eat_num != -1 && count == philo->info.philo_num)
 		{
 			kill(philo->pid, SIGINT);
 			break;
